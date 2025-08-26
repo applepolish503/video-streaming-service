@@ -45,7 +45,7 @@ export function WorldMap({ locations, onSelect, height = "100%" }: Props): JSX.E
           <AnyMarker key={loc.id} position={[loc.lat, loc.lng] as [number, number]} icon={smallIcon} eventHandlers={{ click: () => onSelect?.(loc.id) }}>
             <Popup>
               <div style={{ display: "grid", gap: 4 }}>
-                <strong>{loc.name}</strong>
+                <strong>{loc.nameTh ?? loc.name}</strong>
                 <span style={{ color: "#9aa3b2" }}>{loc.alias}</span>
               </div>
             </Popup>

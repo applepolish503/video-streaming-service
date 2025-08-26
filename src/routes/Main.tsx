@@ -4,8 +4,10 @@ import { demoLocations } from "../resources/locations";
 import { PieChart } from "../components/PieChart";
 import { KpiCard } from "../components/KpiCard";
 import { globalSummary, perLocationSummary } from "../resources/metrics";
+import { useNavigate } from "react-router-dom";
 
 export function Main(): JSX.Element {
+  const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selected = demoLocations.find((l) => l.id === selectedId) || null;
   const summary = selected ? perLocationSummary[selected.id] : globalSummary;
@@ -26,6 +28,19 @@ export function Main(): JSX.Element {
         <KpiCard title="Error packages" value={summary.errorPackages} />
         <PieChart data={summary.muda} centerLabel="Muda" />
       </section>
+
+      <button
+        className="btn"
+        style={{ position: "fixed", left: 16, bottom: 16, zIndex: 2000 }}
+        onClick={() => {
+          if (selected) {
+            navigate(`/detail/${encodeURIComponent(selected.id)}`);
+          }
+        }}
+        disabled={!selected}
+      >
+        Check selected location
+      </button>
     </div>
   );
 }

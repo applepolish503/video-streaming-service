@@ -4,6 +4,7 @@ import { createHashRouter, RouterProvider, Navigate } from "react-router-dom";
 import { App } from "./routes/App";
 import { Login } from "./routes/Login";
 import { Main } from "./routes/Main";
+import { LocationDetail } from "./routes/LocationDetail";
 import "leaflet/dist/leaflet.css";
 import "./styles/global.css";
 
@@ -17,6 +18,7 @@ const router = createHashRouter([
     children: [
       { index: true, element: <Login /> },
       { path: "main", element: <Main /> },
+      { path: "detail/:id", element: <LocationDetail /> },
       { path: "*", element: <Navigate to="/" replace /> },
     ]
   }
