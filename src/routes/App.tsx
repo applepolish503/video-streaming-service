@@ -12,12 +12,10 @@ export function App(): JSX.Element {
           <Link to="/main">Main</Link>
         </nav>
       </header>
-      <main style={{ flex: 1, display: "flex" }}>
-        <div style={{ margin: "0 auto", width: "100%", maxWidth: 1120, padding: 24 }}>
-          <Outlet />
-        </div>
+      <main style={{ display: "flex", width: "100%", height: "calc(100vh - 56px)" }}>
+        <Outlet />
       </main>
-      <footer className="card" style={{ padding: 16, fontSize: 12 }}>Path: {location.pathname}</footer>
+      {/* footer removed to maximize viewport height for map */}
     </div>
   );
 }

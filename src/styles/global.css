@@ -17,11 +17,15 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
+.leaflet-container {
+  background: #0b1020; /* タイル外の背景を白ではなくダークに */
+}
+
 a { color: var(--text); text-decoration: none; }
 
 .btn {
   padding: 10px 14px;
-  border-radius: 10px;
+  border-radius: 0;
   background: var(--primary);
   color: #fff;
   border: 0;
@@ -33,12 +37,12 @@ a { color: var(--text); text-decoration: none; }
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 0;
 }
 
 .input {
   padding: 10px 12px;
-  border-radius: 10px;
+  border-radius: 0;
   border: 1px solid var(--border);
   color: var(--text);
   background: var(--surface-2);

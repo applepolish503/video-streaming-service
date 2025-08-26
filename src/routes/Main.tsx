@@ -1,30 +1,30 @@
 import React, { useState } from "react";
 import { WorldMap } from "../components/WorldMap";
 import { demoLocations } from "../resources/locations";
+import { PieChart } from "../components/PieChart";
+import { globalSummary, perLocationSummary } from "../resources/metrics";
 
 export function Main(): JSX.Element {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selected = demoLocations.find((l) => l.id === selectedId) || null;
+  const summary = selected ? perLocationSummary[selected.id] : globalSummary;
   return (
-    <div className="page" style={{ display: "grid", gap: 16 }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <h1 style={{ fontSize: 24, margin: 0 }}>メイン</h1>
-        <div style={{ display: "flex", gap: 8 }}>
-          <button className="btn secondary">拠点登録</button>
-          <button className="btn">比較</button>
+    <div style={{ height: "100%", width: "100%", display: "grid", gridTemplateColumns: "4fr 1fr", gap: 0, alignItems: "stretch" }}>
+      <section style={{ height: "100%" }}>
+        <WorldMap locations={demoLocations} onSelect={setSelectedId} height="100%" />
+      </section>
+
+      <section className="card" style={{ height: "100%", display: "grid", gridTemplateRows: "auto 1fr", padding: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <h2 style={{ margin: 0, fontSize: 18 }}>サマリ</h2>
+          <span style={{ color: "var(--muted)", fontSize: 12 }}>
+            {selected ? `${selected.name}` : "全拠点"}
+          </span>
         </div>
-      </div>
-
-      <WorldMap locations={demoLocations} onSelect={setSelectedId} />
-
-      <div className="card" style={{ padding: 16 }}>
-        <div style={{ fontWeight: 600, marginBottom: 8 }}>選択した拠点</div>
-        {selected ? (
-          <div>{selected.name} ({selected.alias})</div>
-        ) : (
-          <div style={{ color: "var(--muted)" }}>ピンをクリックしてください</div>
-        )}
-      </div>
+        <div style={{ display: "grid", placeItems: "center" }}>
+          <PieChart data={summary.data} centerLabel={summary.title} />
+        </div>
+      </section>
     </div>
   );
 }
