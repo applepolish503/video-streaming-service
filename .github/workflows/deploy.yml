@@ -28,7 +28,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Set base path for GitHub Pages
         run: echo "GH_PAGES_BASE=/${{ github.event.repository.name }}/" >> $GITHUB_ENV
