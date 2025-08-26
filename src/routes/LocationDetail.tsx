@@ -13,7 +13,8 @@ export function LocationDetail(): JSX.Element {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const videoSrc = activeCam ? `/videos/${id}/${activeCam}.mp4` : undefined;
+  const base = import.meta.env.BASE_URL || "/";
+  const videoSrc = activeCam ? `${base}videos/${encodeURIComponent(id || "")}/${encodeURIComponent(activeCam)}.mp4` : undefined;
   const smallIcon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
     iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
