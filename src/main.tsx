@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import { App } from "./routes/App";
 import { Login } from "./routes/Login";
 import { Main } from "./routes/Main";
@@ -10,14 +10,14 @@ if (!rootElement) {
   throw new Error("Root element with id 'root' not found");
 }
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   { path: "/", element: <App />,
     children: [
       { index: true, element: <Login /> },
       { path: "main", element: <Main /> },
     ]
   }
-]);
+], { basename: "/" });
 
 createRoot(rootElement).render(
   <React.StrictMode>
