@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { WorldMap } from "../components/WorldMap";
 import { demoLocations } from "../resources/locations";
 import { PieChart } from "../components/PieChart";
+import { KpiCard } from "../components/KpiCard";
 import { globalSummary, perLocationSummary } from "../resources/metrics";
 
 export function Main(): JSX.Element {
@@ -14,16 +15,16 @@ export function Main(): JSX.Element {
         <WorldMap locations={demoLocations} onSelect={setSelectedId} height="100%" />
       </section>
 
-      <section className="card" style={{ height: "100%", display: "grid", gridTemplateRows: "auto 1fr", padding: 16 }}>
+      <section className="card" style={{ height: "100%", display: "grid", gridTemplateRows: "auto auto auto 1fr", padding: 16, gap: 12 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <h2 style={{ margin: 0, fontSize: 18 }}>サマリ</h2>
           <span style={{ color: "var(--muted)", fontSize: 12 }}>
             {selected ? `${selected.name}` : "全拠点"}
           </span>
         </div>
-        <div style={{ display: "grid", placeItems: "center" }}>
-          <PieChart data={summary.data} centerLabel={summary.title} />
-        </div>
+        <KpiCard title="On time KPI" value={summary.onTime} />
+        <KpiCard title="Error packages" value={summary.errorPackages} />
+        <PieChart data={summary.muda} centerLabel="Muda" />
       </section>
     </div>
   );

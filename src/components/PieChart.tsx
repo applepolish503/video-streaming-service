@@ -39,7 +39,9 @@ export function PieChart({ data, size = 220, thickness = 22, centerLabel }: Prop
 
   return (
     <div className="card" style={{ padding: 16, display: "grid", gap: 8 }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>{arcs}</svg>
+      <div style={{ display: "grid", placeItems: "center" }}>
+        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ display: "block", margin: "0 auto" }}>{arcs}</svg>
+      </div>
       {centerLabel ? (
         <div style={{ marginTop: -size, height: 0, display: "grid", placeItems: "center", pointerEvents: "none" }}>
           <div style={{ fontSize: 18, fontWeight: 700 }}>{centerLabel}</div>
