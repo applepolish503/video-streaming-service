@@ -1,9 +1,11 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider, Navigate } from "react-router-dom";
 import { App } from "./routes/App";
 import { Login } from "./routes/Login";
 import { Main } from "./routes/Main";
+import "leaflet/dist/leaflet.css";
+import "./styles/global.css";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -15,6 +17,7 @@ const router = createHashRouter([
     children: [
       { index: true, element: <Login /> },
       { path: "main", element: <Main /> },
+      { path: "*", element: <Navigate to="/" replace /> },
     ]
   }
 ], { basename: "/" });

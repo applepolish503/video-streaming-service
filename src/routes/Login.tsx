@@ -11,22 +11,22 @@ export function Login(): JSX.Element {
   }
 
   return (
-    <div style={{ display: "grid", gap: 16 }}>
+    <div className="page" style={{ display: "grid", gap: 16 }}>
       <h1 style={{ fontSize: 28, margin: 0 }}>ログイン</h1>
-      <p style={{ color: "#666", marginTop: 0 }}>メールアドレスを入力してログインしてください。</p>
+      <p style={{ color: "var(--muted)", marginTop: 0 }}>メールアドレスを入力してログインしてください。</p>
       <form onSubmit={handleSubmit} style={{ display: "grid", gap: 12, maxWidth: 420 }}>
         <label style={{ display: "grid", gap: 8 }}>
           <span style={{ fontWeight: 600 }}>メールアドレス</span>
           <input
+            className="input"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@company.com"
             required
-            style={{ padding: "10px 12px", borderRadius: 8, border: "1px solid #ddd", outline: "none" }}
           />
         </label>
-        <button type="submit" style={{ padding: "10px 14px", borderRadius: 8, background: "#111827", color: "#fff", border: 0, cursor: "pointer" }}>
+        <button type="submit" className="btn">
           ログイン
         </button>
       </form>
