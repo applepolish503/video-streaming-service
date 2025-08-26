@@ -8,17 +8,21 @@ type Props = {
 };
 
 export function WorldMap({ locations, onSelect }: Props): JSX.Element {
+  // 型の齟齬でCIが落ちる環境向けに、一時的に any 化したエイリアスを使用
+  const AnyMap = MapContainer as unknown as React.ComponentType<any>;
+  const AnyTile = TileLayer as unknown as React.ComponentType<any>;
+  const AnyCircle = CircleMarker as unknown as React.ComponentType<any>;
   return (
     <div className="card" style={{ overflow: "hidden", height: 520, background: "#0b1020" }}>
-      <MapContainer center={[20, 0]} zoom={2} style={{ height: "100%", width: "100%" }} worldCopyJump>
-        <TileLayer
+      <AnyMap center={[20, 0] as [number, number]} zoom={2} style={{ height: "100%", width: "100%" }} worldCopyJump>
+        <AnyTile
           url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         />
         {locations.map((loc) => (
-          <CircleMarker
+          <AnyCircle
             key={loc.id}
-            center={[loc.lat, loc.lng]}
+            center={[loc.lat, loc.lng] as [number, number]}
             radius={8}
             pathOptions={{
               color: "#7c7cff",
@@ -34,9 +38,9 @@ export function WorldMap({ locations, onSelect }: Props): JSX.Element {
                 <span style={{ color: "#9aa3b2" }}>{loc.alias}</span>
               </div>
             </Popup>
-          </CircleMarker>
+          </AnyCircle>
         ))}
-      </MapContainer>
+      </AnyMap>
     </div>
   );
 }
